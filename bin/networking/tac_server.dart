@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:pin/pin.dart';
 
 import 'network_node.dart';
-import 'simple_client.dart';
 
 @Route('/blocks')
 class BlockRoute extends RouteController {
@@ -12,6 +11,20 @@ class BlockRoute extends RouteController {
     var node = ctxt.getService<NetworkNode>();
     request.response.write(node.blockChain);
   }
+
+  @override
+  void post(HttpRequest request, Context ctxt, Map<String, String> params) {
+    // mines a block
+    var data = request.uri.queryParameters['data'];
+    if (data == null) {
+      request.response
+          .write('Please add a data query parameter to post request');
+      return;
+    }
+    var node = ctxt.getService<NetworkNode>();
+    node.addNextBlock(data);
+    request.response.write('Successfully added a block with data $data');
+  }
 }
 
 class TacServer {
@@ -19,8 +32,6 @@ class TacServer {
   App app = App();
 
   Future<void> start() async {
-    node.addNextBlock('hello');
-    node.addNextBlock('world');
     app.addService(node);
     app.addRoute(BlockRoute);
     await app.start();
@@ -29,12 +40,4 @@ class TacServer {
   Future<void> stop() async {
     await app.stop();
   }
-}
-
-Future<void> main() async {
-  var ts = TacServer();
-  await ts.start();
-  var simpleClient = SimpleClient();
-  await simpleClient.runQuery('', '/blocks');
-  await ts.stop();
 }

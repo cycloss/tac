@@ -1,7 +1,5 @@
 # Tac
 
-## About
-
 An under-development MVP blockchain imiplemented in pure Dart.
 
 - **Hashing algorithm:** [Sha-1](https://github.com/lucas979797/dart-crypto-hash)

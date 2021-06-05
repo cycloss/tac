@@ -9,6 +9,7 @@ class Block {
   // hashing with previous hash means that no block can be modified without changing every consecutive block
   final int timestamp;
   final String data;
+  // only null for genesis block
   final String? prevHash;
   late final String hash;
 

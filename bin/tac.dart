@@ -5,7 +5,11 @@ Future<void> main() async {
   var ts = TacServer();
   await ts.start();
   var simpleClient = SimpleClient();
-  await simpleClient.runQuery('', '/blocks');
+  // mines a block
+  await simpleClient.runPost('/blocks');
+  // gets all blocks
+  await simpleClient.runGet('/blocks');
+
   await ts.stop();
   simpleClient.close();
 }

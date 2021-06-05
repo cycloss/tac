@@ -13,7 +13,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: d4e245071f7db95c49aa68e14f30182542412e29
+      resolved-ref: "74bbe268ce9e4b594eaa156744ce9e7ce9a3dffc"
       url: "https://github.com/lucas979797/dart-crypto-hash"
     source: git
     version: "0.4.0"
@@ -29,7 +29,7 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "358230635de3786e68a54d954f12b36c069b8fcf"
+      resolved-ref: cb7433cf43b89e4d16d1ebb126d7b2025ab7d107
       url: "https://github.com/lucas979797/pin"
     source: git
     version: "0.1.0"
