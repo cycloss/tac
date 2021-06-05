@@ -1,15 +1,16 @@
+import 'dart:convert';
+
 import 'package:crypto_hash/crypto_hash.dart';
 
 import 'utils.dart';
 
 class Block {
   final int index;
-  late final String hash;
-  // hashing with previous hash means that
-  // no block can be modified without changing every consecutive block
-  final String? prevHash;
+  // hashing with previous hash means that no block can be modified without changing every consecutive block
   final int timestamp;
   final String data;
+  final String? prevHash;
+  late final String hash;
 
   static final Block genesis = Block._genesis();
 
@@ -24,9 +25,18 @@ class Block {
         data = 'tac',
         hash = ShaOne.hashString('tac');
 
+  /// Hashes together the block data in their field order
   String getHash() {
-    // TODO use all data to hash block
-    return ShaOne.hashString(prevHash! + data);
+    if (this == genesis) {
+      return genesis.hash;
+    }
+    var indexBytes = bytesFromInt64(index);
+    var tsBytes = bytesFromInt64(timestamp);
+    var dataBytes = utf8.encode(data);
+    var prevHashBytes = utf8.encode(prevHash!);
+    var bytes =
+        List<int>.from(indexBytes + tsBytes + dataBytes + prevHashBytes);
+    return ShaOne.hashBytes(bytes);
   }
 
   @override

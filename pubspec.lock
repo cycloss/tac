@@ -24,6 +24,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.11.0"
+  pin:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: main
+      resolved-ref: "358230635de3786e68a54d954f12b36c069b8fcf"
+      url: "https://github.com/lucas979797/pin"
+    source: git
+    version: "0.1.0"
   typed_data:
     dependency: transitive
     description:

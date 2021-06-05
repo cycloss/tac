@@ -1,8 +1,11 @@
-import 'network_node.dart';
+import 'simple_client.dart';
+import 'tac_server.dart';
 
-void main(List<String> arguments) {
-  var node = NetworkNode();
-  node.addNextBlock('hello');
-  node.addNextBlock('world');
-  node.printChain();
+Future<void> main() async {
+  var ts = TacServer();
+  await ts.start();
+  var simpleClient = SimpleClient();
+  await simpleClient.runQuery('', '/blocks');
+  await ts.stop();
+  simpleClient.close();
 }

@@ -29,6 +29,7 @@ class NetworkNode {
     return validIndex && validPrevHash && validHash;
   }
 
+  /// Resolves conflicting chains my choosing the longer chain. Only accept a chain from the outside when it is longer than our chain
   void replaceChain(List<Block> newChain) {
     if (isValidChain(newChain) && newChain.length > blockChain.length) {
       print('Valid longer blockchain received. Replacing blockchain');
